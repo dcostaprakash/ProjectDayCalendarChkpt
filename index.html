@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,13 +13,38 @@
     <main>
       <h1>Days Calendar</h1>
 
+      <form id="date-picker" class="date-picker">
+        <label for="month-select">Month</label>
+        <select id="month-select"></select>
+
+        <label for="year-input">Year</label>
+        <input
+          id="year-input"
+          type="number"
+          step="1"
+          required
+        />
+
+        <button type="submit">Go to date</button>
+      </form>
+
       <div class="calendar-controls">
-        <button id="previous-month">Previous Month</button>
-        <h2 id="current-month"></h2>
-        <button id="next-month">Next Month</button>
+        <button id="previous-month" type="button">
+          Previous Month
+        </button>
+
+        <h2 id="current-month" aria-live="polite"></h2>
+
+        <button id="next-month" type="button">
+          Next Month
+        </button>
       </div>
 
-      <div class="calendar-grid" id="calendar">
+      <div
+        class="calendar-grid"
+        id="calendar"
+        aria-label="Monthly calendar"
+      >
         <div class="weekday">Sunday</div>
         <div class="weekday">Monday</div>
         <div class="weekday">Tuesday</div>
