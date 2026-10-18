@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 20px;
+  color: #222;
+}
+
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background-color: white;
+}
+
+h1 {
+  text-align: center;
+}
+
+.calendar-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.weekday {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.calendar-day {
+  border: 1px solid #ccc;
+  padding: 10px;
+  min-height: 50px;
+}
+
+button:focus-visible {
+  outline: 3px solid orange;
+}
