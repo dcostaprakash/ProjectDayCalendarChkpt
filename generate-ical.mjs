@@ -1,13 +1,6 @@
-
 import { writeFile } from "node:fs/promises";
 import daysData from "./days.json" with { type: "json" };
-import { getDateForOccurrence } from "./common.mjs";
-
-const monthNames = [
-  "January", "February", "March", "April",
-  "May", "June", "July", "August",
-  "September", "October", "November", "December"
-];
+import { getDateForOccurrence, monthNames } from "./common.mjs";
 
 function formatDate(date) {
   const year = String(date.getFullYear()).padStart(4, "0");
@@ -29,7 +22,7 @@ const lines = [
   "BEGIN:VCALENDAR",
   "VERSION:2.0",
   "PRODID:-//Days Calendar//EN",
-  "CALSCALE:GREGORIAN"
+  "CALSCALE:GREGORIAN",
 ];
 
 let eventCount = 0;
@@ -46,7 +39,7 @@ for (let year = 2020; year <= 2030; year++) {
       year,
       monthIndex,
       day.dayName,
-      day.occurrence
+      day.occurrence,
     );
 
     const dateString = formatDate(date);
@@ -57,7 +50,7 @@ for (let year = 2020; year <= 2030; year++) {
       `DTSTAMP:${formatDate(new Date())}T000000Z`,
       `DTSTART;VALUE=DATE:${dateString}`,
       `SUMMARY:${escapeICalText(day.name)}`,
-      "END:VEVENT"
+      "END:VEVENT",
     );
 
     eventCount++;
