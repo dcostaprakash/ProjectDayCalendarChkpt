@@ -1,4 +1,3 @@
-
 const weekdayNames = [
   "Sunday",
   "Monday",
@@ -9,12 +8,22 @@ const weekdayNames = [
   "Saturday",
 ];
 
-export function getDateForOccurrence(
-  year,
-  monthIndex,
-  dayName,
-  occurrence
-) {
+export const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export function getDateForOccurrence(year, monthIndex, dayName, occurrence) {
   const targetWeekday = weekdayNames.indexOf(dayName);
 
   if (targetWeekday === -1) {
@@ -26,14 +35,9 @@ export function getDateForOccurrence(
   if (occurrence === "last") {
     const lastDay = new Date(year, monthIndex + 1, 0);
 
-    const difference =
-      (lastDay.getDay() - targetWeekday + 7) % 7;
+    const difference = (lastDay.getDay() - targetWeekday + 7) % 7;
 
-    return new Date(
-      year,
-      monthIndex,
-      lastDay.getDate() - difference
-    );
+    return new Date(year, monthIndex, lastDay.getDate() - difference);
   }
 
   const occurrenceNumber = {
@@ -48,18 +52,14 @@ export function getDateForOccurrence(
     throw new Error(`Unknown occurrence: ${occurrence}`);
   }
 
-  const difference =
-    (targetWeekday - firstDay.getDay() + 7) % 7;
+  const difference = (targetWeekday - firstDay.getDay() + 7) % 7;
 
-  const dayOfMonth =
-    1 + difference + (occurrenceNumber - 1) * 7;
+  const dayOfMonth = 1 + difference + (occurrenceNumber - 1) * 7;
 
   const result = new Date(year, monthIndex, dayOfMonth);
 
   if (result.getMonth() !== monthIndex) {
-    throw new Error(
-      `${occurrence} ${dayName} does not exist in this month`
-    );
+    throw new Error(`${occurrence} ${dayName} does not exist in this month`);
   }
 
   return result;
