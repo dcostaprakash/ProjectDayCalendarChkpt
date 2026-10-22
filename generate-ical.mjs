@@ -10,6 +10,13 @@ function formatDate(date) {
   return `${year}${month}${day}`;
 }
 
+function formatTimestamp(date) {
+  return date
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}/, "");
+}
+
 function escapeICalText(text) {
   return String(text)
     .replace(/\\/g, "\\\\")
@@ -47,7 +54,7 @@ for (let year = 2020; year <= 2030; year++) {
     lines.push(
       "BEGIN:VEVENT",
       `UID:${year}-${monthIndex + 1}-${date.getDate()}-${eventCount}@days-calendar`,
-      `DTSTAMP:${formatDate(new Date())}T000000Z`,
+      `DTSTAMP:${formatTimestamp(new Date())}`,
       `DTSTART;VALUE=DATE:${dateString}`,
       `SUMMARY:${escapeICalText(day.name)}`,
       "END:VEVENT",

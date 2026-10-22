@@ -30,15 +30,22 @@ export function getDateForOccurrence(year, monthIndex, dayName, occurrence) {
     throw new Error(`Unknown weekday: ${dayName}`);
   }
 
-  const firstDay = new Date(year, monthIndex, 1);
-
   if (occurrence === "last") {
-    const lastDay = new Date(year, monthIndex + 1, 0);
+    const lastDay = new Date(0);
+    lastDay.setFullYear(year, monthIndex + 1, 0);
+    lastDay.setHours(12, 0, 0, 0);
 
     const difference = (lastDay.getDay() - targetWeekday + 7) % 7;
 
-    return new Date(year, monthIndex, lastDay.getDate() - difference);
+    const result = new Date(0);
+    result.setFullYear(year, monthIndex, lastDay.getDate() - difference);
+    result.setHours(12, 0, 0, 0);
+    return result;
   }
+
+  const firstDay = new Date(0);
+  firstDay.setFullYear(year, monthIndex, 1);
+  firstDay.setHours(12, 0, 0, 0);
 
   const occurrenceNumber = {
     first: 1,
@@ -56,9 +63,11 @@ export function getDateForOccurrence(year, monthIndex, dayName, occurrence) {
 
   const dayOfMonth = 1 + difference + (occurrenceNumber - 1) * 7;
 
-  const result = new Date(year, monthIndex, dayOfMonth);
+  const result = new Date(0);
+  result.setFullYear(year, monthIndex, dayOfMonth);
+  result.setHours(12, 0, 0, 0);
 
-  if (result.getMonth() !== monthIndex) {
+  if (result.getMonth() !== monthIndex || result.getFullYear() !== year) {
     throw new Error(`${occurrence} ${dayName} does not exist in this month`);
   }
 
